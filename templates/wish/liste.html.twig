@@ -5,20 +5,45 @@
 {% block body %}
 <div class="container">
 <h1>Liste</h1>
-
+<div class="col-6">
+{% for type, messages in app.session.flashbag.all() %}
+    {% for message in messages %}
+       
+      
+            <div class="alert alert-{{type}}" role="alert">
+            <i class="fa fa-info-circle"></i>
+           &nbsp; {{message}}</div>
+        
+    {% endfor %}
+{% endfor %}
 <table class="table table-striped">
+    <thead>
+    <tr>
+    <th>#</th>
+    <th>Categorie</th>
+    <th>Nom</th>
+    <th>Date</th>
+    <th colspan=2 >Actions</th>
+    </tr>
+    </thead>
     <tbody>
     {% for w in wishes%}
-        <tr>
+        <tr class="{{ w.isPublished ? 'table-danger' }}">
             <td>{{loop.index}}</td>
+             <td><em>{{w.category.name}}</em></td>
             <td>{{w.title}}</td>
             <td>{{w.dateCreated|date('d/m/Y')}}</td>
             <td>
-            <a href="{{path('app_wish_detail',{id: w.id })}}" class="btn btn-primary">voir</a>
+            <a href="{{path('app_wish_editer',{id: w.id })}}" class="btn btn-primary"> <i class="fa fa-edit"></i></a>
+            </td>
+            <td>
+            <a href="{{path('app_wish_effacer',{id: w.id })}}" class="btn btn-danger"><i class="fa fa-trash"></i></a>
             </td>
         </tr>
         {% endfor %}
     </tbody>
 </table>
+<a class="btn btn-success btn-large mb-5" href="{{path('app_wish_ajouter')}}"> <i class="fa fa-plus" ></i> </a>
+</div>
 </div>
 {% endblock %}
