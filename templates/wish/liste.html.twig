@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ titre}}{% endblock %}
+
+{% block body %}
+<div class="container">
+<h1>Liste</h1>
+
+<table class="table table-striped">
+    <tbody>
+    {% for w in wishes%}
+        <tr>
+            <td>{{loop.index}}</td>
+            <td>{{w.title}}</td>
+            <td>{{w.dateCreated|date('d/m/Y')}}</td>
+            <td>
+            <a href="{{path('app_wish_detail',{id: w.id })}}" class="btn btn-primary">voir</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+</div>
+{% endblock %}

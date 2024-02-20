@@ -20,8 +20,9 @@
   </button>
   <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
     <div class="ms-auto navbar-nav">
-      <a class="nav-item nav-link " href="{{path('app_home')}}">Home </a>
-      <a class="nav-item nav-link" href="#">About us</a>
+    {{ app.request.get('_route') == '_list' ? 'active' }}
+      <a class="nav-item nav-link {{ app.request.get('_route') == 'app_home' ? 'active' }} " href="{{path('app_home')}}">Home </a>
+      <a class="nav-item nav-link  {{ app.request.get('_route') == 'app_about' ? 'active' }} " href="{{path('app_about')}}" href="{{path('app_home')}}">About us</a>
 
 
     </div>
