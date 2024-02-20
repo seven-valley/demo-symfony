@@ -37,7 +37,9 @@
             <a href="{{path('app_wish_editer',{id: w.id })}}" class="btn btn-primary"> <i class="fa fa-edit"></i></a>
             </td>
             <td>
-            <a href="{{path('app_wish_effacer',{id: w.id })}}" class="btn btn-danger"><i class="fa fa-trash"></i></a>
+            <a 
+            onclick="return confirm('delete {{ w.title }} ?')"
+            href="{{path('app_wish_effacer',{id: w.id })}}" class="btn btn-danger"><i class="fa fa-trash"></i></a>
             </td>
         </tr>
         {% endfor %}
