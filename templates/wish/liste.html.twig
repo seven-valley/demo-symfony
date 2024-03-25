@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{% extends 'admin.html.twig' %}
 
 {% block title %}{{ titre}}{% endblock %}
 
@@ -28,7 +28,7 @@
     </thead>
     <tbody>
     {% for w in wishes%}
-        <tr class="{{ w.isPublished ? 'table-danger' }}">
+        <tr class="{{ w.isPublished== false ? 'table-danger' }}">
             <td>{{loop.index}}</td>
              <td><em>{{w.category.name}}</em></td>
             <td>{{w.title}}</td>
@@ -46,6 +46,21 @@
     </tbody>
 </table>
 <a class="btn btn-success btn-large mb-5" href="{{path('app_wish_ajouter')}}"> <i class="fa fa-plus" ></i> </a>
+<div id="demo">code ici</div>
 </div>
 </div>
+<script>
+async function go (){
+let response = await fetch('http://127.0.0.1:8000/admin/user/liste2');
+let users = await response.json();
+console.log(users);
+for (let u of users){
+    let p = document.createElement('p');
+    p.innerHTML = u.email; // <p>augure@gmail.com<p>
+    document.getElementById('demo').appendChild(p);
+    console.log(u.email);
+}
+}
+go();
+</script>
 {% endblock %}

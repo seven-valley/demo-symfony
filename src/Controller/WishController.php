@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Wish;
+use App\Entity\User;
 use App\Form\WishType;
 use App\Form\WishType2;
 use App\Repository\WishRepository;
@@ -12,6 +13,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
+#[Route('/profile')]
 class WishController extends AbstractController
 {
     #[Route('/liste', name: 'app_wish_liste')]
@@ -57,7 +59,7 @@ class WishController extends AbstractController
     public function ajouter(EntityManagerInterface $em,Request $request): Response
     {
         $wish= new Wish();
-
+        $wish->setAuthor($this->getUser()->getPseudo());
         $form = $this->createForm(WishType::class, $wish);
         $form->handleRequest($request);
 

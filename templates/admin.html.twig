@@ -15,18 +15,25 @@
     <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
      <div class="container">
-  <a class="navbar-brand" href="{{path('app_home')}}"><img src="{{asset('img/logo.svg')}}" class="logo"> Bucket List</a>
+  <a class="navbar-brand" href="{{path('app_home')}}"><img src="{{asset('img/logo.svg')}}" class="logo me-3"> Bucket List</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
     <div class="ms-auto navbar-nav">
-    {{ app.request.get('_route') == '_list' ? 'active' }}
-      <a class="nav-item nav-link {{ app.request.get('_route') == 'app_home' ? 'active' }} " href="{{path('app_home')}}">Home </a>
-      <a class="nav-item nav-link  {{ app.request.get('_route') == 'app_about' ? 'active' }} " href="{{path('app_about')}}" href="{{path('app_home')}}">About us</a>
-         <a class="nav-item nav-link  {{ app.request.get('_route') == 'app_login' ? 'active' }} " href="{{path('app_login')}}" href="{{path('app_login')}}">Login</a>
-
+    {# {{ app.request.get('_route') == '_list' ? 'active' }} #}
+   <a class="nav-item nav-link {{ app.request.get('_route') == 'app_wish_liste' ? 'active' }} " href="{{path('app_home')}}">Wishes </a>
+      <a class="nav-item nav-link  {{ app.request.get('_route') == 'app_about' ? 'active' }} " href="{{path('app_about')}}" href="{{path('app_home')}}">Categories</a>
+      
+       {% if is_granted("ROLE_ADMIN") %}
+      <a class="nav-item nav-link  {{ app.request.get('_route') == 'app_user_liste' ? 'active' }} "  href="{{path('app_user_liste')}}">User</a>
+     {% endif %} 
     </div>
+    {% if is_granted("ROLE_ADMIN") %}
+     <h4><span class="badge bg-danger mx-3">ADMIN</span></h4>
+     {% endif %}   
+          <a  href="{{path('app_logout')}}" class="ms-2 btn btn-outline-secondary">{{app.user.prenom}} {{app.user.nom}} <i class="fa-solid fa-right-from-bracket"></i></a>
+
   </div></div>
 </nav>
         {% block body %}{% endblock %}

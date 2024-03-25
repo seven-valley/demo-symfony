@@ -22,9 +22,9 @@ class CategoryRepository extends ServiceEntityRepository
     }
     public function findListCategoriesWithWishes()
     {
-        return $this->createQueryBuilder('i')
+        return $this->createQueryBuilder('c')
             ->addSelect('w')
-            ->join('i.wishes', 'w')
+            ->join('c.wishes', 'w')
             ->where('w.isPublished = true')
             ->orderBy('w.dateCreated', 'DESC')
             ->setMaxResults(50)
